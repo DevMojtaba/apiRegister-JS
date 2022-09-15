@@ -1,0 +1,174 @@
+:root{
+  --orange:#ff9500;
+  --white-color:#fff;
+  --black-color:#333;
+  --light-color:rgba(0,0,0,.3);
+  --light-red:rgb(187, 99, 99);
+  --bg-header-color: #eee;
+  --bg-Color:#e0e0e0;
+}
+@font-face {
+  font-family: "Rubik";
+  src:url('../Awesome/font/Rubik-Italic.ttf') format('ttf');
+}
+*{
+  text-decoration: none;
+  list-style: none;
+  margin: 0;
+  outline: none; 
+  border: none;
+  text-decoration: none;
+  text-transform: capitalize;
+  transition: .5s linear;
+  padding:0;
+  font-family: "Josefin Sans", sans-serif;
+}
+html::-webkit-scrollbar{
+  width:.7rem;
+}
+html::-webkit-scrollbar-track{
+  background: var(--white-color);
+}
+html::-webkit-scrollbar-thumb{
+  background: var(--black-color);
+  border-radius: 5rem;
+}
+/* //////////////////--------Style-------///////////////////// */
+header {
+  position: sticky;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  top: 0;
+  font-size: 18px;
+  background-color: var(--bg-header-color);
+  border-bottom: .1rem solid var(--light-color);
+  padding: 12px;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+
+  z-index: 100;
+}
+
+.main-nav {
+  list-style-type: none;
+  display: none;
+}
+
+header .logo{
+  margin-right: 25px;
+  font-weight: 500;
+  font-size:30px;
+  color: var(--orange);
+  font-family: "Rubik";
+}
+header .logo:hover{
+  color:var(--black-color);
+}
+.main-header{
+  display: flex;
+  align-items: center;
+}
+header form{
+  display: flex;
+  align-items: center;
+  width: 18rem;
+  border-radius: 5rem;
+  height: 45px;
+  background-color: var(--black-color);
+  overflow: hidden;
+}
+header form input{
+  width:100%;
+  height:100%;
+  background:none;
+  font-size: 1rem;
+  color: var(--white-color);
+  padding: 0 2rem;
+  text-transform: none;
+}
+header form label{
+  font-size: 1.5rem;
+  padding-right: 1rem;
+  color: var(--white-color);
+  cursor: pointer;
+}
+header form label:hover{
+  color: var(--orange);
+}
+header .icons div{
+  height:2.7rem;
+  width: 2.7rem;
+  font-size: 1.5rem;
+  background: var(--white-color);
+  line-height: 2.8rem;
+  background: var(--black-color);
+  color: var(--white-color);
+  text-align: center;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-right: .7rem;
+}
+header .icons div:hover,
+header .icons a:hover{
+  background: var(--orange);
+  color: var(--white-color);
+  transform:rotate(360deg);
+}
+.header-ul{
+  position: fixed;
+  top: 0;
+  left: -120%;
+  font-size: 20px;
+  z-index: 100;
+  height: 100%;
+  width: 50%;
+  display:flex;
+  flex-direction: column;
+  background-color:var(--bg-Color);
+  transition: .5s linear;
+}
+.header-ul #close{
+  position: absolute;
+  font-size: 2.5rem;
+  text-align: left;
+  padding: 15px;
+  color: darkred;
+}
+.header-ul #close:hover{
+  color: var(--light-red);
+  transform:rotate(360deg);
+}
+.header-ul ul li{
+  margin: 20px 0;
+
+}
+.header-ul ul li:first-child{
+  border-top: 1px solid #000;
+  margin-top: 70px;
+  padding-top: 30px;
+}
+.header-ul ul li a{
+  color: #333;
+  font-size: 23px;
+  padding-left: 10px;
+  font-weight: 600;
+}
+.header-ul ul li a:hover{
+  color: var(--orange);
+}
+.active {
+  left: 0;
+  box-shadow: 0 0 0 100vw var(--light-color);
+  transform: rotate3d(36ged);
+}
+/* //////////////////--------Media_query-------///////////////////// */
+@media screen and (min-width: 570px) {
+  header{
+    flex-direction: row;
+  }
+  .header-ul{
+    width: 20%;
+  }
+}

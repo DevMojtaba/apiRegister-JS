@@ -1,14 +1,26 @@
+const siginBtn = document.querySelector(".signin-button");
+
 const nameInput = document.querySelector(".name-input");
 const usernameInput = document.querySelector(".user-input");
 const passwordInput = document.querySelector(".pass-input");
+const passwordConInput = document.querySelector(".pass-input-2");
+
 const nameMsg = document.querySelector(".username-msg");
 const emailMsg = document.querySelector(".email-msg");
 const passwordMsg = document.querySelector(".password-msg");
+const passwordMsg2 = document.querySelector(".password-2-msg");
 const sigininMsg = document.querySelector(".signin-status");
-const siginBtn = document.querySelector(".signin-button");
+
 const name = document.querySelector(".name");
 const email = document.querySelector(".email");
 const pass = document.querySelector(".password");
+const pass2 = document.querySelector(".password-2");
+
+const loginBtn = document.querySelector(".login");
+
+loginBtn.addEventListener("click", () => {
+  window.location.href = './pages/login.html'
+});
 
 siginBtn.addEventListener("click", signIn);
 
@@ -17,12 +29,18 @@ function signIn(event) {
   nameMsg.innerText = "";
   emailMsg.innerText = "";
   passwordMsg.innerText = "";
+  passwordMsg2.innerText = "";
+ 
   const nameValue = nameInput.value;
   const usernameValue = usernameInput.value;
   const passwordValue = passwordInput.value;
+  const passwordConValue = passwordConInput.value;
   let ifSendData = true;
 
-  //#region
+   localStorage.setItem("username", usernameValue);
+   localStorage.setItem("password", passwordValue);
+
+  // #region
   if (nameValue.length === 0) {
     nameMsg.innerText = "Please enter your name";
     name.classList.add("error");
@@ -51,30 +69,71 @@ function signIn(event) {
     ifSendData = false;
   } else if (passwordValue.length <= 4) {
     passwordMsg.innerText = "Your password is too short";
-    pass.classList.add("error");
     ifSendData = false;
   } else {
     pass.classList.add("success");
     pass.classList.remove("error");
   }
-  //#endregion
 
-  if (ifSendData) {
+  if (passwordConValue.length === 0 ) {
+    passwordMsg2.innerText = "Please enter your password";
+    pass2.classList.add("error");
+    ifSendData = false;
+  }else if(passwordValue.length <= 4){
+    passwordMsg2.innerText = "Your password is too short";
+    ifSendData = false;
+  }else if(passwordValue.length !== passwordConValue.length){
+    passwordMsg2.innerText = "The passwords are not the same";
+    ifSendData = false;
+  } else {
+    pass2.classList.add("success");
+    pass2.classList.remove("error");
+  }
+
+// #endregion
+  
+
+//#region 
+function saveData() {
+  let usernameValue = usernameInput.value;
+  let passwordValue = passwordInput.value;
+  
+  let user_records = new Array();
+  user_records = JSON.parse(localStorage.getItem("users"))
+    ? JSON.parse(localStorage.getItem("users"))
+    : [];
+  if (
+    user_records.some((v) => {
+      return v.usernameValue == usernameValue;
+    })
+  ) {} else {
+    user_records.push({
+      usernameValue: usernameValue,
+      passwordValue: passwordValue,
+    });
+    localStorage.setItem("users", JSON.stringify(user_records));
+  }
+}
+//#endregion
+  
+if (ifSendData) {
     const body = JSON.stringify({
       name: nameValue,
       email: usernameValue,
-      password: passwordValue
+      password: passwordValue,
+      password_confirmation: passwordConValue,
     });
     const headers = { "Content-Type": "application/json" };
-    fetch("https://api.freerealapi.com/auth/register", {
+    fetch("https://apingweb.com/api/register", {
       method: "POST",
       body: body,
-      headers: headers
+      headers: headers,
     })
-      .then(response => response.json())
-      .then(json => {
+      .then((response) => response.json())
+      .then((json) => {
         if (json) {
-          sigininMsg.innerText = "You signed in successfully";
+          saveData();
+          window.location.href = "./pages/login.html";
         }
       });
   }

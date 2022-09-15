@@ -1,0 +1,81 @@
+@import "navbar.css";
+:root{
+    --orange:#ff9500;
+    --white-color:#fff;
+    --black-color:#333;
+    --light-color:rgba(0,0,0,.3);
+    --light-red:rgb(187, 99, 99);
+    --bg-header-color: #eee;
+    --bg-Color:#e0e0e0;
+    --bg-card-color: #dbdbdb;
+}
+@font-face {
+    font-family: "Rubik";
+    src:url('../Awesome/font/Rubik-Italic.ttf') format('ttf');
+}
+body{
+    background-color: #e0e0e0;
+}
+a {
+    cursor: pointer;
+}
+.active3{
+    --white-color:#111;
+    --black-color:#fff;
+    --light-color:rgba(255,255,255,.3);
+    --bg-header-color: #07182e;
+    --bg-card-color: #2c3e50;
+    background:#2c3e50 ;
+}
+
+.cardContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    height: 200px;
+}
+.cardContainer .card h2{
+    font-family: "Rubik";
+    color: var(--black-color);
+    font-size: 2.3rem;
+    text-shadow: 10px 10px 20px #ff0000;
+    font-weight: normal;
+}
+
+.blog-grid-container .text{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px , 1fr));
+    grid-template-rows: auto;
+    grid-gap: 20px;
+    column-gap: 20px;
+    margin: 70px 10rem;
+}
+
+.blog-grid-container li{
+    padding: 20px;
+    background-color: var(--bg-card-color);
+    border: 2px solid #b46c08;
+    line-height: 30px;
+    height: 200px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.blog-grid-container img{
+    background-color: #ff9500;
+    width: 200px;
+    margin-right: 20px;
+}
+
+@media screen and (max-width: 480px) {
+    .blog-grid-container li{
+        display: flex;
+        flex-direction: column;
+        height: 400px;
+        align-items: center;
+    }
+    main .mainContainer .textImg h1{
+        font-size: 20px;
+    }
+}
